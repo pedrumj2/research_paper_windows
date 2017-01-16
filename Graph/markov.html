@@ -1,0 +1,48 @@
+<div id="mynetwork"></div>
+<script type="text/javascript" src = "vis.min.js"></script>
+<link rel="stylesheet" type="text/css" href = "vis.min.css">
+<script type="text/javascript">
+  // create an array with nodes
+  var nodes = new vis.DataSet([
+    {id: 1, label: 'Connection Count = 1\nRepeat=0', x:10, y:250},
+    {id: 2, label: 'Connection Count = 1\nRepeat=1', x:250, y:250},
+    {id: 3, label: 'Connection Count = 1\nRepeat=2', x:500, y:250},
+    {id: 4, label: 'Connection Count = 1\nRepeat=3', x:750, y:250},
+    {id: 5, label: 'Connection Count = 0\nRepeat=0', x:10, y:10},
+    {id: 6, label: 'Connection Count = 0\nRepeat=1', x:250, y:10},
+    {id: 7, label: 'Connection Count = 2\nRepeat=0', x:10, y:500},
+    {id: 8, label: 'Connection Count = 2\nRepeat=1', x:250, y:500},
+    {id: 9, label: 'Connection Count = 2\nRepeat=2', x:500, y:500}
+
+  ]);
+
+  // create an array with edges
+  var edges = new vis.DataSet([
+    {from: 1, to: 2, arrows:'to',  label: '0.548'},
+    {from: 1, to: 5,arrows:'to',  label: '0.548'},
+    {from: 1, to: 7,arrows:'to',  label: '0.548'},
+    {from: 2, to: 3,arrows:'to',  label: '0.281'},
+    {from: 2, to: 5,arrows:'to',  label: '0.281'},
+    {from: 2, to: 7, arrows:'to', label: '0.281'},
+    {from: 3, to: 4,arrows:'to',  label: '0.131'},
+    {from: 3, to: 5,arrows:'to',  label: '0.131'},
+    {from: 3, to: 7,arrows:'to',  label: '0.131'},
+    {from: 4, to: 5,arrows:'to',  label: '0.352'},
+    {from: 4, to: 7,arrows:'to',  label: '0.763'}
+
+  ]);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    physics: {
+      enabled: false
+    }
+  };
+
+  var network = new vis.Network(container, data, options);
+</script>

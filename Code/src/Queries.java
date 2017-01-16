@@ -5,34 +5,29 @@ import java.sql.*;
 
 public class Queries {
     SqlConnect sqlConnect;
+    public String type;
+    public String duration;
     public Queries(SqlConnect __sqlConnect){
         sqlConnect = __sqlConnect;
     }
 
-    public String getAnomaliesInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{
+    public void execAnomaliesInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{
         String _query;
-        String _anomalyString;
-        ResultSet _rs;
-        String _output;
-        String _strTemp;
-
         _query =
-                "select type from research_paper.grouped\n" +
+                "select type, duration from research_paper.grouped\n" +
                         "where dstIP = "+__serverID+"\n" +
                         "and CONVERT(DATE_FORMAT(date,'%Y-%m-%d %H:%i:00'),DATETIME) = str_to_date(\""+__startTime+"\", \"%Y-%m-%d %H:%i:00\")\n" +
-                        "and type <> \"-\"";
+                        "and anomaly = 1\n" +
+                        "limit 1";
 
-        sqlConnect.execGetQueryIndex(_query);
-        _strTemp =sqlConnect.getQueryIndex("type", 0);
-        if (_strTemp == null){
-            _output = "Clean";
+        if (sqlConnect.execGetQueryIndex(_query) == SqlConnect.SQLRET.SUCCESS) {
+            type = sqlConnect.getQueryIndex("type", 0);
+            duration = sqlConnect.getQueryIndex("duration", 0);
         }
         else{
-            _output = _strTemp;
+            type = "Clean";
+            duration = "";
         }
-
-        return _output;
-
     }
 
     public int getConnectionsStartedInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{

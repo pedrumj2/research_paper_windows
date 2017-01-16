@@ -13,7 +13,7 @@ public class Main {
     static  Queries _queries;
     static ArrayList<Integer> _arrcount;
     static UnFiltered _unfiltered;
-    static int _COUNTROWS = 252;
+    static int _COUNTROWS = 25200;
 
     public static void main(String[] args) throws Exception {
         List<Double> _probs;
@@ -32,7 +32,10 @@ public class Main {
         getAnomalyCounts();
         _unfiltered._probs = getProbs(_unfiltered._counts);
         for (int i =0; i < _probs.size();i ++) {
-            System.out.println(_unfiltered._probs.get(i));
+            System.out.println(_unfiltered._probs.get(i) + "," +
+                    _unfiltered._anomalies.get(i) + "," +
+                    _unfiltered._starts.get(i) + "," +
+                    _unfiltered.durations.get(i) );
         }
     }
 
@@ -48,14 +51,14 @@ public class Main {
             String _endTime;
             _startTime =_timeInterval.getStartTime();
             _endTime = _timeInterval.getEndTime();
-            _unfiltered.addTime(_startTime);
+            _unfiltered.addStart(_startTime);
             _count =  _queries.getConnectionsStartedInIntervalCount(_startTime, _endTime,
                     16393);
             _unfiltered.addCount(_count);
-            _anomaly=  _queries.getAnomaliesInIntervalCount(_startTime, _endTime,
+            _queries.execAnomaliesInIntervalCount(_startTime, _endTime,
                     16393);
-            _unfiltered.addAnomalies(_anomaly);
-
+            _unfiltered.addAnomalies(_queries.type);
+            _unfiltered.addDuration(_queries.duration);
             _timeInterval.increment();
             System.out.println(i);
             j+=1;

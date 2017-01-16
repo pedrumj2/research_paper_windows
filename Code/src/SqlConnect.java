@@ -36,6 +36,9 @@ public class SqlConnect {
 
     public String getQueryIndex(String __column, int __row) throws SQLException{
         String _output;
+      //  if (rs.next()==false){
+        //    return null;
+        //}
         for (int i = 0 ; i < __row; i ++){
             rs.next();
         }
