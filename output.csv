@@ -1,0 +1,145 @@
+﻿Tues,Day,Attack Name,Time,Source Machine,Dest Machine,User,Where,Variant
+1,Tues,perlmagic,8:05:07,135.8.60.182,marx,tristank,tcp,clear
+1,Wed,smurf,20:19:49,*,marx,-,tcp,-
+1,Thurs,pod,11:55:15,1.2.3.4,marx,-,tcp,-
+1,Fri,teardrop,11:00:10,172.16.112.20,marx,-,tcp,-
+2,Mon,guest,15:34:10,135.13.216.191,marx,tristank,tcp,-
+2,Mon,portsweep,17:27:57,192.168.1.10,marx,-,tcp,"fast,ports 1-100"
+2,Fri,imap,12:55:28,195.73.151.50,marx,-,tcp,-
+2,Fri,back,13:55:30,135.8.60.182,marx,-,tcp,-
+3,Mon,phf,11:14:34,197.218.177.69,marx,-,tcp,-
+3,Mon,portsweep,19:28:06,207.75.239.115,marx,-,tcp,"many,ramp"
+3,Wed,multihop,14:22:31,206.229.221.82,marx,guest,tcp,"guest,runs crack"
+3,Wed,back,16:18:44,202.77.162.213,marx,-,tcp,-
+3,Fri,imap,8:16:42,202.49.244.10,marx,-,tcp,-
+3,Fri,imap,8:49:21,202.77.162.213,marx,-,tcp,-
+4,Mon,rootkit,13:03:38,207.230.54.203,marx,imap/v0m,tcp,"imap,trojan login: stage 1"
+4,Mon,smurf,14:03:35,199.174.194.*,marx,-,tcp,1.75 min
+4,Tues,rootkit,12:17:38,207.230.54.203,marx,v0z,tcp,compile sniffer: stage 2
+4,Tues,teardrop,23:15:08,222.222.222.222,marx,-,tcp,-
+4,Wed,portsweep,20:00:29,194.27.251.21,marx,-,tcp,"fast,0-300 -- scantcp 0"
+4,Fri,rootkit,9:11:02,207.230.54.203,marx,v0z,tcp,put sniffer in rc.local: stage 3
+5,Mon,satan,10:11:57,209.154.98.104,marx,-,tcp,level 2
+5,Mon,smurf,12:53:15,"252.169.215,202.77.162",marx,-,tcp,~5 minutes
+5,Mon,smurf,15:33:28,all.outside,marx,-,tcp,~25 minutes
+5,Tues,perlmagic,20:13:16,195.115.218.108,marx,raeburnt,tcp,-
+5,Wed,teardrop,12:46:20,111.111.111.111,marx,-,tcp,-
+5,Thurs,smurf,8:16:59,"152.168.215,202.77.162",marx,-,tcp,5 mins
+5,Thurs,teardrop,9:48:16,222.222.222.222,marx,-,tcp,port 23
+5,Thurs,smurf,11:57:45,all.attackers,marx,-,tcp,about 50 mins
+5,Fri,rootkit,22:53:38,207.230.54.203,marx,-,tcp,"tftp sniffer logs out, Stage 4"
+6,Mon,phf,13:02:04,135.8.60.182,marx,-,tcp,-
+6,Tues,pod,13:04:56,207.103.80.104,marx,-,tcp,10 oversize ping packets
+6,Wed,ipsweep,8:29:08,209.30.70.14,marx,-,tcp,nmap -u -n -p53 (udp scan for named)
+6,Wed,back,14:11:52,135.8.60.182,marx,-,tcp,-
+6,Thurs,dict,10:34:46,206.186.80.111,marx,kiaraa,tcp,
+6,Thurs,phf,11:15:53,209.74.60.168,marx,-,tcp,
+6,Thurs,portsweep,12:29:51,207.103.80.104,marx,-,tcp,
+6,Thurs,smurf,12:48:13,*,marx,-,tcp,
+6,Thurs,teardrop,13:30:00,222.222.222.222,marx,-,tcp,
+6,Thurs,satan,13:57:45,195.115.218.108,marx,-,tcp,
+6,Thurs,perlmagic,16:47:24,196.37.75.158,marx,raeburnt,tcp,
+6,Thurs,satan,16:57:23,128.223.199.68,marx,-,tcp,
+6,Thurs,perlmagic,17:02:54,209.74.60.168,marx,raeburnt,tcp,
+6,Thurs,smurf,17:53:26,*,marx,-,tcp,
+6,Fri,teardrop,8:32:12,2.11.32.45,marx,-,tcp,crashed machine
+6,Fri,smurf,19:12:37,all.attackers,marx,-,tcp,2 hrs
+7,Mon,satan,8:04:25,207.230.54.203,marx,-,tcp,
+7,Mon,phf,18:48:49,197.182.91.233,marx,-,tcp,
+7,Tues,portsweep,16:34:52,194.27.251.21,marx,-,tcp,
+7,Tues,pod,17:10:01,207.103.80.104,marx,-,tcp,
+7,Wed,phf,8:56:59,205.180.112.36,marx,-,tcp,
+7,Wed,teardrop,12:53:40,222.222.222.222,marx,-,tcp,
+7,Thurs,smurf,17:46:58,*,marx,-,tcp,
+7,Thurs,satan,21:40:40,207.75.239.115,marx,-,tcp,
+7,Thurs,perlmagic,22:09:33,135.8.60.182,marx,alie,tcp,
+7,Fri,back,22:51:38,207.75.239.115,marx,-,tcp,
+1,Mon,format,8:05:07,135.8.60.182,pascal,tristank,"tcp,bsm",clear
+1,Mon,ffb,8:07:13,135.8.60.182,pascal,tristank,"tcp,bsm",clear
+1,Wed,neptune,8:12:16,1.2.3.4,pascal,-,tcp,-
+2,Fri,ftp-write,9:10:47,195.73.151.50,pascal,ftp,"tcp,bsm",-
+2,Fri,syslog,22:20:29,10.0.1.20,pascal,-,tcp,-
+3,Mon,satan,9:36:59,152.169.215.104,pascal,-,"tcp,bsm",level1
+3,Mon,ffb,11:32:20,202.247.224.89,pascal,clintonl,"tcp,bsm",clear
+3,Wed,nmap,9:03:21,202.72.1.77,pascal,-,tcp,"slow(12hr),pascal,"
+3,Wed,ftp-write,9:19:29,206.48.44.18,pascal,ftp,"tcp,bsm",-
+3,Wed,smurf,11:55:57,*,pascal,-,tcp,-
+3,Thurs,neptune,15:10:26,10.20.30.40,pascal,-,tcp,"all ports,1hr"
+3,Thurs,warez,23:12:17,192.168.1.10,pascal,ftp,"tcp,bsm",-
+3,Fri,warezmaster,19:01:31,206.186.80.111,pascal,ftp,"tcp,bsm",-
+4,Mon,warezclient,8:05:15,all.attackers,pascal,ftp,"tcp,bsm",-
+4,Mon,pod,11:23:24,207.103.80.104,pascal,-,tcp,-
+4,Tues,warezclient,8:05:11,all.attackers,pascal,ftp,"tcp,bsm",-
+4,Tues,neptune,11:55:38,9.9.9.9,pascal,-,tcp,"ports 20,23,79,80 1hr"
+4,Tues,spy,15:37:41,208.254.251.132,pascal,huws,"tcp,bsm",adds user rsmith: stage 2
+4,Thurs,warezclient,8:05:07,all.attackers,pascal,ftp,"tcp,bsm",
+4,Thurs,syslog,9:52:16,1.1.1.1,pascal,-,tcp,disable syslog
+4,Fri,warezclient,8:05:05,all.attackers,pascal,ftp,"tcp,bsm",
+4,Fri,ffb,9:22:12,135.13.216.191,pascal,jaroslan,"tcp,bsm","add .rhosts, stealthy"
+4,Fri,format,10:55:44,192.168.1.10,pascal,alie,"tcp,bsm",stealthy
+4,Fri,loadmodule,14:10:11,135.13.216.191,pascal,jaroslan,"tcp,bsm","ftp loadmodule, and run, failed"
+5,Mon,teardrop,8:15:02,1.1.1.1,pascal,-,tcp,"port23,100packets"
+5,Mon,ffb,14:10:20,135.13.216.191,pascal,jaroslan,"tcp,bsm",ftp's over exploit files
+5,Mon,ffb,16:22:25,135.13.216.191,pascal,jaroslan,bsm,chmods files. No sniffing
+5,Mon,ffb,17:47:29,135.13.216.191,pascal,jaroslan,bsm,executes attack No sniffing
+5,Mon,format,20:14:14,139.134.61.42,pascal,tristank,bsm,clear No Sniffing
+5,Tues,eject,14:43:08,209.12.13.144,pascal,raeburnt,"tcp,bsm",clear
+5,Tues,eject,16:39:11,209.17.189.98,pascal,alie,"tcp,bsm",clear
+5,Tues,portsweep,20:02:12,200.27.121.118,pascal,-,tcp,uses SYNs
+5,Wed,syslog,11:11:20,197.218.177.69,pascal,-,tcp,-
+5,Wed,eject,22:42:37,197.182.91.233,pascal,alie,"tcp,bsm",stealthy
+5,Thurs,pod,9:41:00,207.103.80.104,pascal,-,tcp,10 pings
+5,Thurs,neptune,10:05:00,10.20.30.40,pascal,-,tcp,all port`s 1 hr
+5,Thurs,land,10:06:14,pascal,pascal,-,tcp,port 79
+5,Thurs,teardrop,10:09:56,1.1.1.1,pascal,-,tcp,port 23
+5,Thurs,portsweep,11:23:12,207.136.86.223,pascal,-,tcp,1 SYN every 1 min
+5,Thurs,neptune,11:42:31,9.9.9.9,pascal,-,tcp,"ports 20,23,79,80 for 1 hr"
+5,Thurs,teardrop,12:05:56,1.1.1.1,pascal,-,tcp,-
+5,Fri,format,8:50:38,199.227.99.125,pascal,lucyj,"tcp,bsm","ftp over files, Stage 1"
+5,Fri,eject,12:34:29,206.48.44.18,pascal,bramy,"tcp,bsm","run self contained exploit, more the uuencoded results"
+5,Fri,format,13:07:22,199.227.99.125,pascal,lucyj,"tcp,bsm","chmod exploit files, Stage 2"
+5,Fri,neptune,17:27:07,230.1.10.20,pascal,-,tcp,port 1-1024 every 5 min for 1 hr
+6,Mon,neptune,19:19:17,9.9.9.9,pascal,-,tcp,"port 20,23,79,80"
+6,Tues,portsweep,8:16:51,206.48.44.18,pascal,-,tcp,"ACK, every 38 secs, ports 1-2000"
+6,Thurs,eject,8:41:50,202.247.224.89,pascal,raeburnt,tcp,
+6,Thurs,ffb,9:06:46,199.174.194.16,pascal,alie,"tcp,bsm",
+6,Thurs,eject,9:32:03,135.8.60.182,pascal,alie,"tcp,bsm",
+6,Thurs,eject,9:50:46,195.73.151.50,pascal,alie,"tcp,bsm",
+6,Thurs,eject,10:00:14,135.8.60.182,pascal,alie,"tcp,bsm",
+6,Thurs,pod,10:27:24,207.103.80.104,pascal,-,tcp,
+6,Thurs,neptune,11:32:23,230.1.10.20,pascal,-,tcp,
+6,Thurs,eject,12:21:55,209.12.13.144,pascal,raeburnt,"tcp,bsm",
+6,Thurs,neptune,13:31:08,10.20.30.40,pascal,-,tcp,
+6,Thurs,eject,14:14:56,199.227.99.125,pascal,raeburnt,"tcp,bsm",
+6,Thurs,portsweep,14:41:47,206.48.44.18,pascal,-,tcp,
+6,Thurs,ffb,14:43:31,209.154.98.104,pascal,alie,tcp,
+6,Thurs,teardrop,15:23:47,1.1.1.1,pascal,-,tcp,
+6,Thurs,eject,17:50:09,207.253.84.13,pascal,alie,"tcp,bsm",
+6,Thurs,eject,19:50:15,202.49.244.10,pascal,raeburnt,bsm,no sniffing
+6,Thurs,ffb,20:30:59,208.254.251.132,pascal,alie,bsm,no sniffing
+6,Thurs,eject,20:39:41,206.222.3.197,pascal,darleent,bsm,no sniffing
+6,Thurs,eject,20:47:35,209.117.157.183,pascal,alie,bsm,no sniffing
+6,Thurs,eject,23:43:29,202.72.1.77,pascal,raeburnt,bsm,no sniffing
+6,Fri,neptune,9:31:52,10.20.30.40,pascal,-,tcp,"ports 23,25 for 1 hr"
+7,Mon,syslog,12:42:51,1.1.1.1,pascal,-,tcp,
+7,Tues,phf,17:10:01,206.47.98.151,pascal,alie,tcp,No bsm
+7,Tues,loadmodule,19:16:45,209.74.60.168,pascal,raeburnt,tcp,No bsm
+7,Fri,neptune,9:48:11,10.20.30.40,pascal,-,tcp,
+7,Fri,smurf,17:16:23,10.different,pascal,-,tcp,
+7,Fri,neptune,19:21:20,9.9.9.9,pascal,-,tcp,
+1,Tues,loadmodule,10:12:06,135.8.60.182,zeno,tristank,tcp,clear
+1,Thurs,dict,9:06:03,135.8.60.182,zeno,alie,tcp,-
+2,Wed,land,9:32:03,zeno,zeno,-,tcp,-
+4,Tues,satan,8:50:13,192.168.1.10,zeno,-,tcp,level2
+4,Thurs,portsweep,15:15:18,194.7.248.153,zeno,-,tcp,"ports 1-2000 one every 20 sec,scantcp 2"
+5,Thurs,teardrop,10:36:48,123.123.123.123,zeno,-,tcp,-
+5,Thurs,satan,10:42:53,208.240.124.83,zeno,-,tcp,level0
+5,Thurs,portsweep,11:25:11,196.227.33.189,zeno,-,tcp,1 ACK every 20 sec
+5,Fri,loadmodule,11:12:16,197.218.177.69,zeno,wardc,tcp,clear
+5,Fri,portsweep,11:46:39,205.160.208.190,zeno,-,tcp,"port 1-100, one every 3 min, FIN scan"
+6,Mon,satan,17:29:28,202.72.1.77,zeno,-,tcp,level 0
+6,Tues,land,17:53:49,zeno,zeno,-,tcp,port 23
+6,Wed,neptune,10:41:42,135.13.216.191,zeno,-,tcp,all ports for an hour
+6,Thurs,portsweep,12:03:45,202.247.224.89,zeno,-,tcp,
+7,Wed,loadmodule,9:41:51,209.12.13.144,zeno,raeburnt,tcp,
+7,Wed,portsweep,23:10:42,128.223.199.68,zeno,-,tcp,
