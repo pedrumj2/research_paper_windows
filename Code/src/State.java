@@ -59,10 +59,7 @@ public class State {
                     _newAction.count +=1;
                     actions.add(_newAction);
                 }
-
             }
-
-
         }
         if (_output==null){
             _output = createNewStartState(__countConnections, __startStates);

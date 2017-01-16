@@ -12,16 +12,16 @@ public class Main {
     static  TimeInterval _timeInterval;
     static  Queries _queries;
     static ArrayList<Integer> _arrcount;
-    static ArrayList<Integer> _arrcountAnomaly;
-    static int _COUNTROWS = 25200;
+    static UnFiltered _unfiltered;
+    static int _COUNTROWS = 252;
 
     public static void main(String[] args) throws Exception {
         List<Double> _probs;
-        List<Double> _probsAnomaly;
+        _unfiltered = new UnFiltered(_COUNTROWS);
         _sqlConnect = new SqlConnect();
         _timeInterval = new TimeInterval();
         _arrcount =   new ArrayList<Integer>(_COUNTROWS);
-        _arrcountAnomaly =   new ArrayList<Integer>(_COUNTROWS);
+        _unfiltered =   new UnFiltered(_COUNTROWS);
         _queries = new Queries(_sqlConnect);
         _startStates  = getStates();
         _probs = getProbs(_arrcount);
@@ -30,9 +30,9 @@ public class Main {
         //}
         _timeInterval = new TimeInterval();
         getAnomalyCounts();
-        _probsAnomaly = getProbs(_arrcountAnomaly);
+        _unfiltered._probs = getProbs(_unfiltered._counts);
         for (int i =0; i < _probs.size();i ++) {
-            System.out.println(_probsAnomaly.get(i));
+            System.out.println(_unfiltered._probs.get(i));
         }
     }
 
@@ -44,15 +44,17 @@ public class Main {
 
         for (int i =0; i < _COUNTROWS; i++){
             String _startTime;
+            String _anomaly;
             String _endTime;
             _startTime =_timeInterval.getStartTime();
             _endTime = _timeInterval.getEndTime();
-
+            _unfiltered.addTime(_startTime);
             _count =  _queries.getConnectionsStartedInIntervalCount(_startTime, _endTime,
                     16393);
-
-            _arrcountAnomaly.add(_count);
-
+            _unfiltered.addCount(_count);
+            _anomaly=  _queries.getAnomaliesInIntervalCount(_startTime, _endTime,
+                    16393);
+            _unfiltered.addAnomalies(_anomaly);
 
             _timeInterval.increment();
             System.out.println(i);
@@ -66,8 +68,8 @@ public class Main {
 
     }
 
-    private static List<Double> getProbs(List<Integer> __arrcount){
-        List<Double> _output;
+    private static ArrayList<Double> getProbs(ArrayList<Integer> __arrcount){
+        ArrayList<Double> _output;
         Double _prob;
         _output = new ArrayList<Double>();
         for (int i = 0 ; i < _COUNTROWS -20; i++){
@@ -120,7 +122,7 @@ public class Main {
             _startState = _startState.Add(_count, _startStates);
 
             _timeInterval.increment();
-         //   System.out.println(i);
+            System.out.println(i);
             j+=1;
             if (j==84){
               //  System.out.println("--" + "," +

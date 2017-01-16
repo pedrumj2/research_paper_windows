@@ -9,39 +9,32 @@ public class Queries {
         sqlConnect = __sqlConnect;
     }
 
-    public int getConnectionsInIntervalCount(String __startTime, String __endTime, int __serverID,
-                                      boolean __anomaly) throws SQLException{
+    public String getAnomaliesInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{
         String _query;
         String _anomalyString;
         ResultSet _rs;
-        int _output;
+        String _output;
         String _strTemp;
-        if (__anomaly ==true){
-            _anomalyString = "1";
-        }
-        else{
-            _anomalyString = "0";
-        }
-        
-        _query =
-        "select sum(count) as count2 from research_paper.grouped\n" +
-                "where anomaly = "+_anomalyString+"\n" +
-                "and dstIP = "+__serverID+"\n" +
-                "and date < str_to_date(\""+__endTime+"\", \"%Y-%m-%d %H:%i:%s\")\n" +
-                "and DATE_ADD(date, INTERVAL TIME_TO_SEC(duration) SECOND) > str_to_date(\""+__startTime+"\", \"%Y-%m-%d %H:%i:%s\")\n";
 
+        _query =
+                "select type from research_paper.grouped\n" +
+                        "where dstIP = "+__serverID+"\n" +
+                        "and CONVERT(DATE_FORMAT(date,'%Y-%m-%d %H:%i:00'),DATETIME) = str_to_date(\""+__startTime+"\", \"%Y-%m-%d %H:%i:00\")\n" +
+                        "and type <> \"-\"";
 
         sqlConnect.execGetQueryIndex(_query);
-        _strTemp =sqlConnect.getQueryIndex("count2", 0);
+        _strTemp =sqlConnect.getQueryIndex("type", 0);
         if (_strTemp == null){
-            _output = 0;
+            _output = "Clean";
         }
         else{
-            _output = Integer.parseInt(_strTemp);
+            _output = _strTemp;
         }
+
         return _output;
 
     }
+
     public int getConnectionsStartedInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{
         String _query;
         String _anomalyString;
