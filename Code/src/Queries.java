@@ -11,6 +11,46 @@ public class Queries {
         sqlConnect = __sqlConnect;
     }
 
+    public void createConnectionTable(){
+        String _query;
+        _query =
+                "drop table research_paper.connections";
+        sqlConnect.updateQuery(_query);
+
+        _query =
+                "CREATE TABLE `connections` (\n" +
+                        "  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
+                        "  `conn_clean` int(11) NOT NULL,\n" +
+                        "  `conn_unfiltered` int(11) NOT NULL,\n" +
+                        "  `type` char(20) NOT NULL,\n" +
+                        "  `startTime` datetime NOT NULL,\n" +
+                        "  PRIMARY KEY (`id`)\n" +
+                        ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n";
+        sqlConnect.updateQuery(_query);
+
+    }
+
+    public void addConnection(int __countClean, int __countUnfiltered, String __type,
+                              String __dateTime){
+        String _query;
+
+        _query =
+                "insert into  research_paper.connections(conn_clean, conn_unfiltered, type, startTime)\n" +
+                        "values(" + __countClean + ",  " + __countUnfiltered +
+                        " ,  \"" + __type + "\",   \"" + __dateTime + "\")";
+
+        sqlConnect.updateQuery(_query);
+
+    }
+
+    public ResultSet getConnections()throws SQLException{
+        String _query;
+
+        _query =
+                "Select * from  research_paper.connections";
+
+        return sqlConnect.getQuery(_query);
+    }
     public void execAnomaliesInIntervalCount(String __startTime, String __endTime, int __serverID) throws SQLException{
         String _query;
         _query =

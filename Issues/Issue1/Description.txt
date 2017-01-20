@@ -1,0 +1,1 @@
+Explaining to that the model is actually a markov chain model

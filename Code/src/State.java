@@ -1,6 +1,8 @@
 /**
  * Created by Pedrum on 1/15/2017.
  */
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 public class State {
     public int countConnections;
@@ -42,7 +44,8 @@ public class State {
         }
         countTotal  = _sum;
     }
-    public State Add(int __countConnections, List<State> __startStates){
+
+    public State incrementTransition(int __countConnections, List<State> __startStates){
         State _output;
         if (__countConnections == countConnections) {
             _output = getRepeatedState(__countConnections);
@@ -59,11 +62,12 @@ public class State {
                     _newAction.count +=1;
                     actions.add(_newAction);
                 }
+                else{
+                    _output = createNewStartState(__countConnections, __startStates);
+                }
             }
         }
-        if (_output==null){
-            _output = createNewStartState(__countConnections, __startStates);
-        }
+
         return _output;
     }
 
@@ -120,6 +124,28 @@ public class State {
         actions.add(_newAction);
         __startStates.add(_newState);
         return _newState;
+    }
+
+    public static List<State> generateStates(Queries __queries)throws SQLException {
+        State _startState ;
+        List<State> _startStates;
+        _startState = new State(-1, -1);
+        _startStates = new LinkedList<State>();
+        ResultSet _resultSet;
+        int _count;
+        int j =0;
+
+        _resultSet = __queries.getConnections();
+        while(_resultSet.next()){
+            _count = _resultSet.getInt("conn_clean");
+            _startState = _startState.incrementTransition(_count, _startStates) ;
+            j+=1;
+            if (j==84){
+                _startState = _startState.incrementTransition(0, _startStates);
+                j = 0;
+            }
+        }
+        return _startStates;
     }
 
 
