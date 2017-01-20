@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.*;
 public class State {
     public int countConnections;
-    public int repeat;
+
     public List<Action> actions;
     private boolean probSet;
     private int countTotal;
-    public State(int __countConnections, int __repeat){
+    public State(int __countConnections){
         actions = new LinkedList<Action>();
         countConnections = __countConnections;
-        repeat = __repeat;
+
         probSet = false;
     }
     public double getProb(int __countConnections){
@@ -47,26 +47,20 @@ public class State {
 
     public State incrementTransition(int __countConnections, List<State> __startStates){
         State _output;
-        if (__countConnections == countConnections) {
-            _output = getRepeatedState(__countConnections);
-            if (_output == null){
-                _output = createNewState(__countConnections);
+
+        _output = getNonRepeatedState(__countConnections);
+        if (_output == null){
+            _output = getStartState(__countConnections, __startStates);
+            if (_output != null){
+                Action _newAction = new Action(_output);
+                _newAction.count +=1;
+                actions.add(_newAction);
+            }
+            else{
+                _output = createNewStartState(__countConnections, __startStates);
             }
         }
-        else{
-            _output = getNonRepeatedState(__countConnections);
-            if (_output == null){
-                _output = getStartState(__countConnections, __startStates);
-                if (_output != null){
-                    Action _newAction = new Action(_output);
-                    _newAction.count +=1;
-                    actions.add(_newAction);
-                }
-                else{
-                    _output = createNewStartState(__countConnections, __startStates);
-                }
-            }
-        }
+
 
         return _output;
     }
@@ -88,16 +82,7 @@ public class State {
         }
         return null;
     }
-    private State getRepeatedState(int __countConnections){
-        for (int i =0; i < actions.size();i++){
-            if (actions.get(i).state.countConnections == __countConnections
-                    && actions.get(i).state.repeat == repeat + 1){
-                actions.get(i).count +=1;
-                return actions.get(i).state;
-            }
-        }
-        return null;
-    }
+
 
     public static State getStartState(int __countConnections, List<State> __startStates){
         for (int i =0; i < __startStates.size();i++){
@@ -108,17 +93,9 @@ public class State {
         }
         return null;
     }
-    private State createNewState(int __countConnections){
-        State _newState = new State(__countConnections, repeat+1);
-        Action _newAction = new Action(_newState);
-        _newAction.count +=1;
-        actions.add(_newAction);
 
-        return _newState;
-
-    }
     private State createNewStartState(int __countConnections, List<State> __startStates){
-        State _newState = new State(__countConnections, 0);
+        State _newState = new State(__countConnections);
         Action _newAction = new Action(_newState);
         _newAction.count +=1;
         actions.add(_newAction);
@@ -129,7 +106,7 @@ public class State {
     public static List<State> generateStates(Queries __queries)throws SQLException {
         State _startState ;
         List<State> _startStates;
-        _startState = new State(-1, -1);
+        _startState = new State(-1);
         _startStates = new LinkedList<State>();
         ResultSet _resultSet;
         int _count;
