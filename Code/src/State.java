@@ -5,125 +5,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 public class State {
-    public int countConnections;
 
-    public List<Action> actions;
     private boolean probSet;
-    private int countTotal;
-    public State(int __countConnections){
-        actions = new LinkedList<Action>();
-        countConnections = __countConnections;
+    private int countMaxConnection;
 
-        probSet = false;
+    public State(ArrayList<Integer> __arrCount){
+
+        countMaxConnection = getMaxConnection(__arrCount);
     }
-    public double getProb(int __countConnections){
-        if (probSet == false){
-            setProb();
-            probSet = true;
+
+    public ArrayList<Double> probInState(ArrayList<Integer> __arrCount, int __index){
+        ArrayList<Double> _output;
+        int _count;
+        _output = new ArrayList<Double>(countMaxConnection+1);
+        for (int i =0; i < countMaxConnection+1; i ++){
+            _output.add(0.0);
         }
-        for (int i =0;i< actions.size();i++){
-            if (actions.get(i).state.countConnections ==__countConnections){
-                return actions.get(i).prob;
+        for (int i =0; i< 20; i++){
+            _count = __arrCount.get(__index - 19 +i);
+            if (_count > 200){
+                _count = 200;
             }
+            _output.set(_count, _output.get(_count)+(double)1/20);
         }
-        return 0;
-    }
-
-    private void setProb(){
-        setTotal();
-        for (int  i = 0; i< actions.size();i++){
-            actions.get(i).prob = actions.get(i).count/(double)countTotal;
-        }
-    }
-
-    private void setTotal(){
-        int _sum;
-        _sum =0;
-        for (int i =0; i < actions.size();i++){
-            _sum += actions.get(i).count;
-        }
-        countTotal  = _sum;
-    }
-
-    public State incrementTransition(int __countConnections, List<State> __startStates){
-        State _output;
-
-        _output = getNonRepeatedState(__countConnections);
-        if (_output == null){
-            _output = getStartState(__countConnections, __startStates);
-            if (_output != null){
-                Action _newAction = new Action(_output);
-                _newAction.count +=1;
-                actions.add(_newAction);
-            }
-            else{
-                _output = createNewStartState(__countConnections, __startStates);
-            }
-        }
-
-
         return _output;
     }
 
-    public State getNexState(int __countConnections){
-        for (int i =0; i< actions.size(); i++){
-            if (actions.get(i).state.countConnections == __countConnections){
-                return actions.get(i).state;
+
+    private int getMaxConnection(ArrayList<Integer> __arrCount){
+        int _max;
+        _max =0;
+        for (int i = 0; i< __arrCount.size(); i++){
+            if (__arrCount.get(i) > _max){
+                _max = __arrCount.get(i);
             }
         }
-        return null;
-    }
-    private State getNonRepeatedState(int __countConnections){
-        for (int i =0; i < actions.size();i++){
-            if (actions.get(i).state.countConnections == __countConnections){
-                actions.get(i).count +=1;
-                return actions.get(i).state;
-            }
+        if (_max > 200){
+            _max = 200;
         }
-        return null;
+        return _max;
     }
 
 
-    public static State getStartState(int __countConnections, List<State> __startStates){
-        for (int i =0; i < __startStates.size();i++){
-            if (__startStates.get(i).countConnections == __countConnections ){
-
-                return __startStates.get(i);
-            }
-        }
-        return null;
-    }
-
-    private State createNewStartState(int __countConnections, List<State> __startStates){
-        State _newState = new State(__countConnections);
-        Action _newAction = new Action(_newState);
-        _newAction.count +=1;
-        actions.add(_newAction);
-        __startStates.add(_newState);
-        return _newState;
-    }
-
-    public static List<State> generateStates(Queries __queries)throws SQLException {
-        State _startState ;
-        List<State> _startStates;
-        _startState = new State(-1);
-        _startStates = new LinkedList<State>();
-        ResultSet _resultSet;
-        int _count;
-        int j =0;
-
-        _resultSet = __queries.getConnections();
-        while(_resultSet.next()){
-            _count = _resultSet.getInt("conn_clean");
-            _startState = _startState.incrementTransition(_count, _startStates) ;
-            j+=1;
-            if (j==84){
-                _startState = _startState.incrementTransition(0, _startStates);
-                j = 0;
-            }
-        }
-        return _startStates;
-    }
 
 
 }

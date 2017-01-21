@@ -15,11 +15,11 @@ public class IntervalData {
     public ArrayList<Integer> countsClean;
     private int rowCount;
 
-    public IntervalData(int __countRows, Queries __queries, List<State> __startStates) throws SQLException{
+    public IntervalData(int __countRows, Queries __queries) throws SQLException{
         rowCount=__countRows;
         initArrays();
         fillIntervalData(__queries);
-        fillProbs(__startStates);
+
     }
 
     public void Print(){
@@ -98,46 +98,6 @@ public class IntervalData {
 
     }
 
-    private void fillProbs( List<State> __startStates){
-        cleanProbs = getProbs(__startStates, countsClean);
-        Anomalyprobs = getProbs(__startStates, countsUnfiltered);
-    }
 
-    private ArrayList<Double> getProbs( List<State> __startStates, List<Integer> __arrCounts){
-        Double _prob;
-        ArrayList<Double> _probs;
-        _probs = new ArrayList<Double>(rowCount);
-        //first 20 are empty
-        for (int i =0; i < 20; i++){
-            _probs.add(1.0);
-        }
-        for (int i =19; i< rowCount; i++){
-            _prob = getProb(i, __startStates, __arrCounts);
-            _probs.add(_prob);
-        }
-        return _probs;
-    }
-
-
-    private  double getProb(int __index, List<State> __startStates, List<Integer> __count){
-        State _startState;
-        int _count;
-        double _prob;
-        _prob = 1;
-
-        _startState = State.getStartState(__count.get(__index), __startStates);
-        if (_startState == null){
-            return 0;
-        }
-        for (int i = 0; i< 20; i++){
-            _count = __count.get(__index+i-19);
-            _prob *= _startState.getProb(_count);
-            _startState = _startState.getNexState(_count);
-            if (_startState == null){
-                return 0;
-            }
-        }
-        return _prob;
-    }
 
 }
